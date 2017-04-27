@@ -8,9 +8,8 @@ from matplotlib import pyplot as plt
 
 os.chdir('data')
 matfile = sio.loadmat('Farsiu_Ophthalmology_2013_Control_Subject_1001.mat', squeeze_me=True, struct_as_record=False)
-print matfile
-image = np.array(matfile['images'])
+image = np.array(matfile['layerMaps'])
 print image.shape
 plt.figure()
-plt.imshow(image[:,:,12,],'gray')
+plt.imshow(image[:,:,:,],'gray')
 plt.show()
