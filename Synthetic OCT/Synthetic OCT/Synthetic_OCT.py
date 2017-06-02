@@ -11,14 +11,16 @@ from scipy.ndimage.filters import gaussian_filter as gaussian
 
 matfile = sio.loadmat('data/Farsiu_Ophthalmology_2013_Control_Subject_1001.mat', squeeze_me=True, struct_as_record=False)
 img = np.array(matfile['images'])
-plt.figure()
-plt.imshow(img[:,:,2], 'gray')
-plt.show()
+#plt.figure()
+#plt.imshow(img[:,:,2], 'gray')
+#plt.show()
 
 #Convert rgb to grayscale
 def rgb2gray(rgb):
 	return np.dot(rgb[...,:3], [0.299, 0.587, 0.114])
 img = rgb2gray(img);
+
+sv.imsave('normal.jpg', img)
 
 def forwardDifferenceGradient(img):  
 	diffY = np.zeros_like(img)
@@ -42,12 +44,12 @@ def tanhFormula(gradientY, gradientX, k):
 	return YVal, XVal
 
 img = img.astype("float32")
-gauss = gaussian(img, 11)
+#gauss = gaussian(img, 11)
 shiftedY = np.zeros_like(img)
 shiftedX = np.zeros_like(img)
 for i in range(10):
 	dY, dX = forwardDifferenceGradient(img)
-	cY, cX = sigmoidFormula(dY, dX, 20)
+	cY, cX = tanhFormula(dY, dX, 20)
 	shiftedY[:] = cY
 	shiftedX[:] = cX
 	shiftedY[1:,:] -= cY[:-1,:]
@@ -55,4 +57,4 @@ for i in range(10):
 	img += 0.25*(shiftedY+shiftedX)
 
 sv.imsave('anisotropic.jpg', img)
-sv.imsave('gaussian.jpg', gauss)
+#sv.imsave('gaussian.jpg', gauss)
