@@ -4,25 +4,16 @@ __email__ = 'joorgemelo@gmail.com'
 import scipy.io as sio
 import scipy.ndimage as sp 
 import scipy.misc as sv
-from scipy.ndimage.filters import gaussian_filter as gaussian
 import os
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.ndimage.filters import gaussian_filter as gaussian
 
-<<<<<<< HEAD
 matfile = sio.loadmat('data/Farsiu_Ophthalmology_2013_Control_Subject_1001.mat', squeeze_me=True, struct_as_record=False)
-print matfile
-image = np.array(matfile['images'])
-print image.shape
-plt.figure()
-plt.imshow(image[:,:,2], 'gray')
-plt.show()
-=======
-matfile = sio.loadmat('data/Subject_10.mat', squeeze_me=True, struct_as_record=False)
 img = np.array(matfile['images'])
-#plt.figure()
-#plt.imshow(img[:,:,2], 'gray')
-#plt.show()
+plt.figure()
+plt.imshow(img[:,:,2], 'gray')
+plt.show()
 
 #Convert rgb to grayscale
 def rgb2gray(rgb):
@@ -65,4 +56,3 @@ for i in range(10):
 
 sv.imsave('anisotropic.jpg', img)
 sv.imsave('gaussian.jpg', gauss)
->>>>>>> origin/master
