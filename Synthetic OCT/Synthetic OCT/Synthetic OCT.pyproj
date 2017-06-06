@@ -22,10 +22,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="aniso1.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="aniso2.py" />
+    <Compile Include="fastaniso.py" />
     <Compile Include="Synthetic_OCT.py" />
   </ItemGroup>
   <PropertyGroup>
